@@ -1,0 +1,20 @@
+* {
+    font-family: 'Mukta', sans-serif;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    height: auto;
+    height: 10%;
+}
+
+.logo-text {
+    height: 100px;
+    font-size: 100px;
+}
+
+.mmocat-icon {
+    width: fit-content;
+    height: fit-content;
+}
