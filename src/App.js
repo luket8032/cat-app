@@ -4,6 +4,7 @@ import Navbar from './components/Navbar.jsx';
 import Home from './components/Home.jsx';
 import News from './components/News.jsx';
 import Games from './components/Games.jsx';
+import About from './components/About';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
               <Route path='/' element={<Home/>}/>
               <Route path='/news' element={<News/>}/>
               <Route path='/games' element={<Games/>}/>
+              <Route path='/about' element={<About/>}/>
             </Routes>
           </BrowserRouter>
     </div>

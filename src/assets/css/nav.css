@@ -1,0 +1,61 @@
+.nav {
+    max-height: fit-content;
+    padding-top: 15px;
+    border-bottom: 1px solid silver;
+    box-shadow:
+}
+
+.logo {
+    display: flex;
+    width: 65%;
+    margin: auto;
+    align-items: flex-end;
+}
+
+.mmocat{
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.navlist {
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    justify-content: left;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.navlink {
+    margin: 1rem;
+    font-size: 1.5rem;
+    color: grey;
+    text-decoration: none;
+}
+
+.navlink:hover {
+    color: black;
+    transition: 0.5s;
+}
+
+.git-button {
+    display: flex;
+    border-width: 2px;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    font-size: x-large;
+    background-color: black;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.git-button:hover {
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+}
+
+.icon {
+    padding: 5px;
+}
