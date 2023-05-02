@@ -4,20 +4,36 @@
 
 .logo {
     display: flex;
-    align-items: flex-end;
-    height: auto;
+    align-items: center;
     height: 10%;
+    width: 80%;
+    margin: auto;
+    padding: 15px;
 }
 
-.mmocat-icon {
+.mmocat{
     height: 60px;
-    margin-right: 5px; 
 }
 
-.logo-text {
-    height: fit-content;
-    font-size: 36px;
-    line-height: 1;
-    margin: 0;
-    padding: 0;
+
+.navlist {
+    display: flex;
+    list-style-type: none;
+    width: 100%;
+    height: 60px;
+    justify-content: left;
+    margin-left: 100px;
+    align-items: end;
+}
+
+.navlink {
+    margin: 1rem;
+    font-size: 1.5rem;
+    color: grey;
+    text-decoration: none;
+    transition: transform .2s;
+}
+
+.navlink:hover {
+    transform: scale(1.2);
 }
