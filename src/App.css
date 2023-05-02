@@ -4,17 +4,20 @@
 
 .logo {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     height: auto;
     height: 10%;
 }
 
-.logo-text {
-    height: 100px;
-    font-size: 100px;
+.mmocat-icon {
+    height: 60px;
+    margin-right: 5px; 
 }
 
-.mmocat-icon {
-    width: fit-content;
+.logo-text {
     height: fit-content;
+    font-size: 36px;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
 }
