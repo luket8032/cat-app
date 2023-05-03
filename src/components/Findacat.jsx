@@ -6,7 +6,7 @@ const Findacat = () => {
   const [results, setResults] = useState([])
 
   useEffect(() => {
-    fetch('https://api.thecatapi.com/v1/images/search?limit=10', {headers: {'x-api-key': api_key}})
+    fetch('https://api.thecatapi.com/v1/images/search?limit=24', {headers: {'x-api-key': api_key}})
     .then(res => res.json())
     .then(data => setResults(data))
   }, [])
