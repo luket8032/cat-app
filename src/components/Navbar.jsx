@@ -4,7 +4,6 @@ import catlogo from '../assets/mmocat.png'
 import '../assets/css/nav.css'
 
 const Navbar = () => {
-  
   return (
       <div class='nav'>
         <div class='logo'>

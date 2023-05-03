@@ -1,6 +1,6 @@
 .nav {
     max-height: fit-content;
-    padding-top: 15px;
+    padding-top: 5px;
     border-bottom: 1px solid silver;
     box-shadow:
 }
@@ -14,7 +14,7 @@
 
 .mmocat{
     height: 60px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .navlist {
