@@ -27,3 +27,26 @@ h1 {
     line-height: 1.5;
     font-size: 1.7em;
 }
+
+.homepage-btns {
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+}
+
+.homepage-btn {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+.homepage-btn:hover {
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+}

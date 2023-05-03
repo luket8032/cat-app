@@ -1,0 +1,17 @@
+h1 {
+    text-align: center;
+}
+
+.findacat-img {
+    height: 200px;
+    width: 200px;
+    border-radius: 30px;
+    object-fit: cover;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.image-grid {
+    width: fit-content;
+    margin: auto;
+    padding: 4px;
+}
