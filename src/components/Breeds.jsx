@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Games = () => {
+const Breeds = () => {
   return (
     <div>
-      <h1>Games</h1>
+      <h1>Breeds</h1>
     </div>
   )
 }
 
-export default Games
+export default Breeds

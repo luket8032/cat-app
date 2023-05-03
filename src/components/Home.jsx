@@ -6,14 +6,21 @@ const Home = () => {
   const [results, setResults] = useState([])
 
   useEffect(() => {
-    fetch('https://api.thecatapi.com/v1/images/search?limit=4&breed_ids=beng', {headers: {'x-api-key': api_key}})
+    fetch('https://api.thecatapi.com/v1/images/search?limit=4&mime_types=gif', {headers: {'x-api-key': api_key}})
     .then(res => res.json())
     .then(data => setResults(data))
   }, [])
 
   return (
-    <div>
-      {results.length > 0 && <img src={results[0].url} alt="kitty" />}
+    <div className='homepage'>
+      {results.length > 0 && <img className='home-img' src={results[0].url} alt="kitty" />}
+      <div>
+        <h1>All the cat images you'll ever need in one place. 😺</h1>
+        <p className='landing-text'>Welcome to CatHub, your one-stop-shop for downloading all your favorite cat images.
+           With our powerful search feature and free downloads, finding and using the perfect kitty picture has never been easier. So why wait? 
+           Start browsing our collection of adorable feline friends today! </p>
+      </div>
+      
     </div>
   )
 }

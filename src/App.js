@@ -2,8 +2,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 import Home from './components/Home.jsx';
-import News from './components/News.jsx';
-import Games from './components/Games.jsx';
+import Findacat from './components/Findacat.jsx';
+import Breeds from './components/Breeds.jsx';
 import About from './components/About';
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<Home/>}/>
-              <Route path='/news' element={<News/>}/>
-              <Route path='/games' element={<Games/>}/>
+              <Route path='/findacat' element={<Findacat/>}/>
+              <Route path='/breeds' element={<Breeds/>}/>
               <Route path='/about' element={<About/>}/>
             </Routes>
           </BrowserRouter>
