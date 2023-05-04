@@ -3,6 +3,11 @@
     padding-top: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid silver;
+    margin: auto;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    opacity: 0.95;
 }
 
 .logo {
