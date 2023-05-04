@@ -1,4 +1,4 @@
-h1 {
+.slogan {
     text-align: left;
     height: fit-content;
     width: 75%;
@@ -26,6 +26,7 @@ h1 {
 .landing-text {
     line-height: 1.5;
     font-size: 1.7em;
+    color: grey;
 }
 
 .homepage-btns {

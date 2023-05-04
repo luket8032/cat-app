@@ -15,7 +15,7 @@ const Home = () => {
     <div className='homepage'>
       {results.length > 0 && <img className='home-img' src={results[0].url} alt="kitty" />}
       <div>
-        <h1>All the cat images you'll ever need in one place. 😺</h1>
+        <h1 className='slogan'>All the cat images you'll ever need in one place. 😺</h1>
         <p className='landing-text'>Welcome to CatHub, your one-stop-shop for downloading all your favorite cat images.
            With our powerful search feature and free downloads, finding and using the perfect kitty picture has never been easier. So why wait? 
            Start browsing our collection of adorable feline friends today! </p>
