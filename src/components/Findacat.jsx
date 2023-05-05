@@ -13,7 +13,8 @@ const Findacat = () => {
   const [isRuleBroken, setisRuleBroken] = useState(false);
   const [isMultiplePages, setisMultiplePages] = useState(true);
   const [paginationCount, setpaginationCount] = useState(26);
-  const [imgType, setimgType] = useState('')
+  const [imgType, setimgType] = useState('');
+  const [hideBreed, sethideBreed] = useState(false);
 
 
   useEffect(() => {
@@ -29,7 +30,6 @@ const Findacat = () => {
         } else {
           setisMultiplePages(true);
         }
-        console.log(paginationCount);
         return res.json();
       }),
       fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json())
@@ -37,13 +37,17 @@ const Findacat = () => {
       .then(data => {
         setResults(data[0]);
         setBreedList(data[1]);
-        console.log(paginationCount)
         if (breed !== '' && (order === 'ASC' || order === "DESC" )) {
           setisRuleBroken(true);
         } else {
           setisRuleBroken(false);
         }
-        console.log(isMultiplePages);
+
+        if (imgType !== "") {
+          sethideBreed(true);
+        } else {
+          sethideBreed(false);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +64,6 @@ const Findacat = () => {
   const handlePrevPage = () => {
     setPage(page - 1);
   }
-
 
   if (isLoading) {
     return (
@@ -90,10 +93,11 @@ const Findacat = () => {
           <option value="">Random</option>
         </select>
 
-        <label for="choosebreed">Breed:</label>
+        <label for="choosebreed" style={{display: hideBreed ? 'none' : 'line'}}>Breed:</label>
         <select
         name="choosebreed"
         id="choosebreed"
+        style={{display: hideBreed ? 'none' : 'line'}}
         onChange={(e) => {
           const selectedBreed = e.target.value;
           setBreed(selectedBreed);
@@ -127,6 +131,10 @@ const Findacat = () => {
 
       <div className='brokenrule' style={{display: isRuleBroken ? 'block': 'none'}}>
             <h1>Only random ordering is available for sorting by breed.</h1>
+      </div>
+
+      <div className='brokenrule' style={{display: hideBreed ? 'block': 'none'}}>
+            <h1 className='note'>Note: breed sorting is not available while sorting by image type.</h1>
       </div>
 
       <div className='image-grid' style={{display: isRuleBroken ? 'block': 'hidden'}}>
