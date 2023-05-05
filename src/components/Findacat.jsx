@@ -7,7 +7,7 @@ const Findacat = () => {
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [order, setOrder] = useState('DESC');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [breedlist, setBreedList] = useState([]);
   const [breed, setBreed] = useState('');
   const [isRuleBroken, setisRuleBroken] = useState(false);
@@ -15,12 +15,14 @@ const Findacat = () => {
   const [paginationCount, setpaginationCount] = useState(26);
   const [imgType, setimgType] = useState('');
   const [hideBreed, sethideBreed] = useState(false);
+  const [categorylist, setcategorylist] = useState([]);
+  const [category, setCategory] = useState([]);
 
 
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}&mime_types=${imgType}`, {headers: {'x-api-key': api_key}})
+      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}&mime_types=${imgType}&category_ids=${category}`, {headers: {'x-api-key': api_key}})
       .then(res => {
         setpaginationCount(res.headers.get('pagination-count'));
         if (paginationCount <= 25) {
@@ -30,13 +32,16 @@ const Findacat = () => {
         } else {
           setisMultiplePages(true);
         }
+        console.log(paginationCount)
         return res.json();
       }),
-      fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json())
+      fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json()),
+      fetch('https://api.thecatapi.com/v1/categories').then(res => res.json())
     ])
       .then(data => {
         setResults(data[0]);
         setBreedList(data[1]);
+        setcategorylist(data[2]);
         if (breed !== '' && (order === 'ASC' || order === "DESC" )) {
           setisRuleBroken(true);
         } else {
@@ -55,7 +60,7 @@ const Findacat = () => {
       .finally (() => {
         setLoading(false);
       })
-  }, [order, page, breed, imgType])
+  }, [order, page, breed, imgType, category])
 
   const handleNextPage = () => {
     setPage(page + 1);
@@ -126,6 +131,28 @@ const Findacat = () => {
           <option value="gif">gif</option>
           <option value="jpg">jpg</option>
           <option value="png">png</option>
+        </select>
+
+        <label for="choosecategory">Category:</label>
+        <select
+        name="choosecategory"
+        id="choosecategory"
+        onChange={(e) => {
+          const selectedCategory = e.target.value;
+          console.log(paginationCount);
+          setCategory(selectedCategory);
+          if (page === 1) {
+            setPage(null);
+          } else {
+            setPage(page);
+          }
+        }}
+        defaultValue={category}
+        >
+          <option value="">Any</option>
+          {categorylist.map(result => (
+            <option value={result.id}>{result.name}</option>
+          ))}
         </select>
       </div>
 
