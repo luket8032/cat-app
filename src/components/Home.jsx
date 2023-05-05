@@ -1,15 +1,35 @@
 import React, { useEffect, useState }  from 'react'
+import BeatLoader from "react-spinners/BeatLoader";
 import '../assets/css/home.css'
 
 const Home = () => {
   const api_key = 'live_VCzktalCGYDHVGnpidpr17uDiRrkOePItc8ABgKWRzqm5jxR0QjpuUbrKwBtFCeM';
   const [results, setResults] = useState([])
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://api.thecatapi.com/v1/images/search?limit=4&mime_types=gif', {headers: {'x-api-key': api_key}})
     .then(res => res.json())
     .then(data => setResults(data))
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      setLoading(false);
+    })
   }, [])
+
+  if (isLoading) {
+    return (
+      <>
+      <div className='findacat-loader'>
+      <BeatLoader color='grey'/>
+      </div>
+      </>
+    )
+
+  }
 
   return (
     <div className='homepage'>

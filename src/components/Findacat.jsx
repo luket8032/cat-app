@@ -4,21 +4,30 @@ import BeatLoader from "react-spinners/BeatLoader";
 
 const Findacat = () => {
   const api_key = 'live_VCzktalCGYDHVGnpidpr17uDiRrkOePItc8ABgKWRzqm5jxR0QjpuUbrKwBtFCeM';
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [order, setOrder] = useState('DESC');
-  const [page, setPage] = useState(1)
-  const [breed, setBreed] = useState('')
-  const [category, setCategory] = useState('')
+  const [page, setPage] = useState(1);
+  const [breedlist, setBreedList] = useState([]);
+  const [breed, setBreed] = useState('');
+  const [isRuleBroken, setisRuleBroken] = useState(false)
+
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25`, {headers: {'x-api-key': api_key}})
-      .then(res => {
-        return res.json();
-      })
+    Promise.all([
+      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}`, {headers: {'x-api-key': api_key}}).then(res => res.json()),
+      fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json())
+    ])
       .then(data => {
-        setResults(data);
+        setResults(data[0]);
+        setBreedList(data[1]);
+        if (breed !== '' && (order === 'ASC' || order === "DESC" )) {
+          setisRuleBroken(true);
+        } else {
+          setisRuleBroken(false);
+        }
+        console.log(isRuleBroken);
       })
       .catch((err) => {
         console.log(err);
@@ -26,7 +35,7 @@ const Findacat = () => {
       .finally (() => {
         setLoading(false);
       })
-  }, [order, page])
+  }, [order, page, breed, isRuleBroken])
 
   const handleNextPage = () => {
     setPage(page + 1);
@@ -47,7 +56,6 @@ const Findacat = () => {
       </div>
       </>
     )
-
   }
 
   return (
@@ -65,10 +73,32 @@ const Findacat = () => {
         >
           <option value="DESC">Newest</option>
           <option value="ASC">Oldest</option>
+          <option value="">Random</option>
+        </select>
+
+        <label for="choosebreed">Breed:</label>
+        <select
+        name="choosebreed"
+        id="choosebreed"
+        onChange={(e) => {
+          const selectedBreed = e.target.value;
+          setBreed(selectedBreed);
+          setOrder('');
+        }}
+        defaultValue={breed}
+        >
+          <option value="">Any</option>
+          {breedlist.map(result => (
+            <option value={result.id}>{result.id}</option>
+          ))}
         </select>
       </div>
 
-      <div className='image-grid'>
+      <div className='brokenrule' style={{display: isRuleBroken ? 'block': 'none'}}>
+            <h1>Only random ordering is available for sorting by breed.</h1>
+      </div>
+
+      <div className='image-grid' style={{display: isRuleBroken ? 'block': 'hidden'}}>
       {results.map(result => (
         <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
       ))}
