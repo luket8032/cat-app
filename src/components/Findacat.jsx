@@ -13,14 +13,23 @@ const Findacat = () => {
   const [isRuleBroken, setisRuleBroken] = useState(false);
   const [isMultiplePages, setisMultiplePages] = useState(true);
   const [paginationCount, setpaginationCount] = useState(26);
+  const [imgType, setimgType] = useState('')
 
 
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}`, {headers: {'x-api-key': api_key}})
+      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}&mime_types=${imgType}`, {headers: {'x-api-key': api_key}})
       .then(res => {
         setpaginationCount(res.headers.get('pagination-count'));
+        if (paginationCount <= 25) {
+          setisMultiplePages(false);
+        } else if (order === ''){
+          setisMultiplePages(false);
+        } else {
+          setisMultiplePages(true);
+        }
+        console.log(paginationCount);
         return res.json();
       }),
       fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json())
@@ -34,14 +43,6 @@ const Findacat = () => {
         } else {
           setisRuleBroken(false);
         }
-
-        if (paginationCount <= 25) {
-          setisMultiplePages(false);
-        } else if (order === ''){
-          setisMultiplePages(false);
-        } else {
-          setisMultiplePages(true);
-        }
         console.log(isMultiplePages);
       })
       .catch((err) => {
@@ -50,7 +51,7 @@ const Findacat = () => {
       .finally (() => {
         setLoading(false);
       })
-  }, [order, page, breed])
+  }, [order, page, breed, imgType])
 
   const handleNextPage = () => {
     setPage(page + 1);
@@ -97,6 +98,7 @@ const Findacat = () => {
           const selectedBreed = e.target.value;
           setBreed(selectedBreed);
           setOrder('');
+          setimgType('');
         }}
         defaultValue={breed}
         >
@@ -104,6 +106,22 @@ const Findacat = () => {
           {breedlist.map(result => (
             <option value={result.id}>{result.id}</option>
           ))}
+        </select>
+
+        <label for='chooseimgtype'>Image Type:</label>
+        <select
+        name="chooseimgtype"
+        id="chooseimgtype"
+        onChange={(e) => {
+          const selectedType = e.target.value;
+          setimgType(selectedType)
+        }}
+        defaultValue={imgType}
+        >
+          <option value="">Any</option>
+          <option value="gif">gif</option>
+          <option value="jpg">jpg</option>
+          <option value="png">png</option>
         </select>
       </div>
 
