@@ -54,3 +54,25 @@ h1 {
     color: grey;
     font-size: 1em;
 }
+
+.filters {
+    scale: 1.2;
+    display: flex;
+    justify-content: left;
+    width: fit-content;
+    margin: auto;
+    margin-top: 1.5%;
+    gap: 30px;
+}
+
+label {
+    display: block;
+}
+
+select {
+    width: 200px;
+}
+
+.brokenrule {
+    margin-top: 2%;
+}

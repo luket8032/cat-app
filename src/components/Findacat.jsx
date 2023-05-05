@@ -83,6 +83,7 @@ const Findacat = () => {
   return (
     <div>
       <div className='filters'>
+        <div>
         <label for='chooseorder'>Order By:</label>
         <select
         name="chooseorder"
@@ -97,7 +98,9 @@ const Findacat = () => {
           <option value="ASC">Oldest</option>
           <option value="">Random</option>
         </select>
+        </div>
 
+        <div>
         <label for="choosebreed" style={{display: hideBreed ? 'none' : 'line'}}>Breed:</label>
         <select
         name="choosebreed"
@@ -116,7 +119,9 @@ const Findacat = () => {
             <option value={result.id}>{result.id}</option>
           ))}
         </select>
+        </div>
 
+        <div>
         <label for='chooseimgtype'>Image Type:</label>
         <select
         name="chooseimgtype"
@@ -132,7 +137,9 @@ const Findacat = () => {
           <option value="jpg">jpg</option>
           <option value="png">png</option>
         </select>
+        </div>
 
+        <div>
         <label for="choosecategory">Category:</label>
         <select
         name="choosecategory"
@@ -154,6 +161,7 @@ const Findacat = () => {
             <option value={result.id}>{result.name}</option>
           ))}
         </select>
+        </div>
       </div>
 
       <div className='brokenrule' style={{display: isRuleBroken ? 'block': 'none'}}>
