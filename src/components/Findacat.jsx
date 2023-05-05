@@ -12,7 +12,7 @@ const Findacat = () => {
   const [breed, setBreed] = useState('');
   const [isRuleBroken, setisRuleBroken] = useState(false);
   const [isMultiplePages, setisMultiplePages] = useState(true);
-  const [paginationCount, setpaginationCount] = useState(null);
+  const [paginationCount, setpaginationCount] = useState(26);
 
 
   useEffect(() => {
@@ -20,8 +20,7 @@ const Findacat = () => {
     Promise.all([
       fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}`, {headers: {'x-api-key': api_key}})
       .then(res => {
-        setpaginationCount(res.headers.get('pagination-count'))
-        console.log(paginationCount);
+        setpaginationCount(res.headers.get('pagination-count'));
         return res.json();
       }),
       fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json())
@@ -29,6 +28,7 @@ const Findacat = () => {
       .then(data => {
         setResults(data[0]);
         setBreedList(data[1]);
+        console.log(paginationCount)
         if (breed !== '' && (order === 'ASC' || order === "DESC" )) {
           setisRuleBroken(true);
         } else {
@@ -36,6 +36,8 @@ const Findacat = () => {
         }
 
         if (paginationCount <= 25) {
+          setisMultiplePages(false);
+        } else if (order === ''){
           setisMultiplePages(false);
         } else {
           setisMultiplePages(true);
@@ -52,12 +54,10 @@ const Findacat = () => {
 
   const handleNextPage = () => {
     setPage(page + 1);
-    console.log(page);
   }
 
   const handlePrevPage = () => {
     setPage(page - 1);
-    console.log(page);
   }
 
 
