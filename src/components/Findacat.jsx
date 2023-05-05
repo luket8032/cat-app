@@ -10,13 +10,20 @@ const Findacat = () => {
   const [page, setPage] = useState(1);
   const [breedlist, setBreedList] = useState([]);
   const [breed, setBreed] = useState('');
-  const [isRuleBroken, setisRuleBroken] = useState(false)
+  const [isRuleBroken, setisRuleBroken] = useState(false);
+  const [isMultiplePages, setisMultiplePages] = useState(true);
+  const [paginationCount, setpaginationCount] = useState(null);
 
 
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}`, {headers: {'x-api-key': api_key}}).then(res => res.json()),
+      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}`, {headers: {'x-api-key': api_key}})
+      .then(res => {
+        setpaginationCount(res.headers.get('pagination-count'))
+        console.log(paginationCount);
+        return res.json();
+      }),
       fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json())
     ])
       .then(data => {
@@ -27,7 +34,13 @@ const Findacat = () => {
         } else {
           setisRuleBroken(false);
         }
-        console.log(isRuleBroken);
+
+        if (paginationCount <= 25) {
+          setisMultiplePages(false);
+        } else {
+          setisMultiplePages(true);
+        }
+        console.log(isMultiplePages);
       })
       .catch((err) => {
         console.log(err);
@@ -35,7 +48,7 @@ const Findacat = () => {
       .finally (() => {
         setLoading(false);
       })
-  }, [order, page, breed, isRuleBroken])
+  }, [order, page, breed])
 
   const handleNextPage = () => {
     setPage(page + 1);
@@ -104,7 +117,7 @@ const Findacat = () => {
       ))}
     </div>
 
-    <div className="pagination-bar">
+    <div className="pagination-bar" style={{display: isMultiplePages ? 'flex': 'none'}}>
         {page > 1 && <button className="page-btn" onClick={handlePrevPage}>{"< Prev Page"}</button>}
         <button className="page-btn" onClick={handleNextPage}> {"Next Page >"} </button>
       </div>
