@@ -7,7 +7,7 @@ const Findacat = () => {
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [order, setOrder] = useState('DESC');
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [breedlist, setBreedList] = useState([]);
   const [breed, setBreed] = useState('');
   const [isRuleBroken, setisRuleBroken] = useState(false);
@@ -165,11 +165,11 @@ const Findacat = () => {
       </div>
 
       <div className='brokenrule' style={{display: isRuleBroken ? 'block': 'none'}}>
-            <h1>Only random ordering is available for sorting by breed.</h1>
+            <h1 className='note'>Note: Only random ordering is available for sorting by breed.</h1>
       </div>
 
       <div className='brokenrule' style={{display: hideBreed ? 'block': 'none'}}>
-            <h1 className='note'>Note: breed sorting is not available while sorting by image type.</h1>
+            <h1 className='note'>Note: Breed sorting is not available while sorting by image type.</h1>
       </div>
 
       <div className='image-grid' style={{display: isRuleBroken ? 'block': 'hidden'}}>

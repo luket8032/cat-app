@@ -14,7 +14,7 @@ const Navbar = () => {
             <li><a href="/breeds" className='navlink'>Breeds</a></li>
             <li><a href="/about" className='navlink'>About</a></li>
           </ul>
-          <button className='git-button'><SiGithub size={30} className='icon'/>GitHub</button>
+          <a href="https://github.com/luket8032/cat-app"><button className='git-button'><SiGithub size={30} className='icon'/>GitHub</button></a>
         </div>
       </div>
   )
