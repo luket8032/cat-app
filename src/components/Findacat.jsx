@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState }  from 'react'
 import '../assets/css/findacat.css'
 import BeatLoader from "react-spinners/BeatLoader";
+import {CiSearch} from 'react-icons/ci';
+import Modal from './Modal.jsx'
 
 const Findacat = () => {
   const api_key = 'live_VCzktalCGYDHVGnpidpr17uDiRrkOePItc8ABgKWRzqm5jxR0QjpuUbrKwBtFCeM';
@@ -17,6 +19,8 @@ const Findacat = () => {
   const [hideBreed, sethideBreed] = useState(false);
   const [categorylist, setcategorylist] = useState([]);
   const [category, setCategory] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
 
   useMemo(() => {
@@ -69,6 +73,10 @@ const Findacat = () => {
   const handlePrevPage = () => {
     setPage(page - 1);
   }
+
+  const handleImageClick = (url) => {
+    setSelectedImage(url);
+  };
 
   if (isLoading) {
     return (
@@ -171,14 +179,24 @@ const Findacat = () => {
       <div className='brokenrule' style={{display: hideBreed ? 'block': 'none'}}>
             <h1 className='note'>Note: Breed sorting is not available while sorting by image type.</h1>
       </div>
-
+      
       <div className='image-grid' style={{display: isRuleBroken ? 'block': 'hidden'}}>
       {results.map(result => (
-        <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
+        <div className='container'>
+          <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
+          <div className='middle'>
+            <button className='text' onClick={() => handleImageClick(result.url)}><CiSearch size={30}/></button>
+          </div>
+        </div>
       ))}
-    </div>
+      </div>
+      {selectedImage && (
+        <div className='modal'>
+          <img className='findacat-img' src={selectedImage} alt='selected' />
+        </div>
+      )}
 
-    <div className="pagination-bar" style={{display: isMultiplePages ? 'flex': 'none'}}>
+      <div className="pagination-bar" style={{display: isMultiplePages ? 'flex': 'none'}}>
         {page > 1 && <button className="page-btn" onClick={handlePrevPage}>{"< Prev Page"}</button>}
         <button className="page-btn" onClick={handleNextPage}> {"Next Page >"} </button>
       </div>

@@ -2,12 +2,51 @@ h1 {
     text-align: center;
 }
 
+.container {
+    position: relative;
+    width: fit-content;
+}
+
 .findacat-img {
     height: 200px;
     width:200px;
     border-radius: 30px;
     object-fit: cover;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.container:hover .findacat-img {
+    opacity: 0.3;
+}
+  
+.container:hover .middle {
+    opacity: 1;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    vertical-align: bottom;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 15px;
 }
 
 .image-grid {
@@ -75,4 +114,10 @@ select {
 
 .brokenrule {
     margin-top: 2%;
+}
+
+.modal {
+    height: 100%;
+    width: 100%;
+    position: fixed;
 }
