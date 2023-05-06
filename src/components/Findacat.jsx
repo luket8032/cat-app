@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useMemo, useState }  from 'react'
 import '../assets/css/findacat.css'
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -19,7 +19,7 @@ const Findacat = () => {
   const [category, setCategory] = useState([]);
 
 
-  useEffect(() => {
+  useMemo(() => {
     setLoading(true);
     Promise.all([
       fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}&mime_types=${imgType}&category_ids=${category}`, {headers: {'x-api-key': api_key}})

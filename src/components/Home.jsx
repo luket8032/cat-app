@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useMemo, useState }  from 'react'
 import BeatLoader from "react-spinners/BeatLoader";
 import '../assets/css/home.css'
 
@@ -7,7 +7,7 @@ const Home = () => {
   const [results, setResults] = useState([])
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
+  useMemo(() => {
     setLoading(true);
     fetch('https://api.thecatapi.com/v1/images/search?limit=4&mime_types=gif', {headers: {'x-api-key': api_key}})
     .then(res => res.json())
