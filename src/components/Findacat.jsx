@@ -76,6 +76,7 @@ const Findacat = () => {
 
   const handleImageClick = (url) => {
     setSelectedImage(url);
+    setShowModal(prev => !prev);
   };
 
   if (isLoading) {
@@ -189,7 +190,9 @@ const Findacat = () => {
           </div>
         </div>
       ))}
+      <Modal showModal={showModal} setShowModal={setShowModal} selectedImage={selectedImage} />
       </div>
+
       {selectedImage && (
         <div className='modal'>
           <img className='findacat-img' src={selectedImage} alt='selected' />
