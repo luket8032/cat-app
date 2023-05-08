@@ -9,7 +9,7 @@ const Findacat = () => {
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [order, setOrder] = useState('DESC');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [breedlist, setBreedList] = useState([]);
   const [breed, setBreed] = useState('');
   const [isRuleBroken, setisRuleBroken] = useState(false);
@@ -64,7 +64,7 @@ const Findacat = () => {
       .finally (() => {
         setLoading(false);
       })
-  }, [order, page, breed, imgType, category])
+  }, [order, page, breed, imgType, category, paginationCount])
 
   const handleNextPage = () => {
     setPage(page + 1);
@@ -197,7 +197,7 @@ const Findacat = () => {
       )}
 
       <div className="pagination-bar" style={{display: isMultiplePages ? 'flex': 'none'}}>
-        {page > 1 && <button className="page-btn" onClick={handlePrevPage}>{"< Prev Page"}</button>}
+        {page > 0 && <button className="page-btn" onClick={handlePrevPage}>{"< Prev Page"}</button>}
         <button className="page-btn" onClick={handleNextPage}> {"Next Page >"} </button>
       </div>
     </div>

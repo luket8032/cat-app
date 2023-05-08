@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState }  from 'react'
+import React, { useMemo, useState }  from 'react'
 import BeatLoader from "react-spinners/BeatLoader";
 import '../assets/css/home.css'
 
