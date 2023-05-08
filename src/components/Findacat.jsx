@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState }  from 'react'
+import React, { useMemo, useState }  from 'react'
 import '../assets/css/findacat.css'
 import BeatLoader from "react-spinners/BeatLoader";
 import {CiSearch} from 'react-icons/ci';
@@ -192,12 +192,6 @@ const Findacat = () => {
       ))}
       <Modal showModal={showModal} setShowModal={setShowModal} selectedImage={selectedImage} />
       </div>
-
-      {selectedImage && (
-        <div className='modal'>
-          <img className='findacat-img' src={selectedImage} alt='selected' />
-        </div>
-      )}
 
       <div className="pagination-bar" style={{display: isMultiplePages ? 'flex': 'none'}}>
         {page > 0 && <button className="page-btn" onClick={handlePrevPage}>{"< Prev Page"}</button>}
