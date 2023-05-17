@@ -1,0 +1,11 @@
+.breed-img{
+    height: 400px;
+    width:400px;
+    border-radius: 30px;
+    object-fit: cover;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
