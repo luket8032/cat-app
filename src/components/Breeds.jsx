@@ -12,6 +12,7 @@ const Breeds = () => {
   const [breedImg, setBreedImg] = useState([]);
 
   useMemo(() => {
+    setLoading(true);
     Promise.all([
       fetch('https://api.thecatapi.com/v1/breeds', {headers: {'x-api-key': api_key}}).then(res => res.json()),
       fetch(`https://api.thecatapi.com/v1/breeds/${breed}`, {headers: {'x-api-key': api_key}}).then(res => res.json()),
