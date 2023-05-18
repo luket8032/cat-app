@@ -5,6 +5,7 @@ import Home from './components/Home.jsx';
 import Findacat from './components/Findacat.jsx';
 import Breeds from './components/Breeds.jsx';
 import About from './components/About';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path='/about' element={<About/>}/>
             </Routes>
           </BrowserRouter>
+          <Footer/>
     </div>
   );
 }

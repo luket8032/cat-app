@@ -125,7 +125,7 @@ const Findacat = () => {
         >
           <option value="">Any</option>
           {breedlist.map(result => (
-            <option value={result.id}>{result.id}</option>
+            <option value={result.id}>{result.name}</option>
           ))}
         </select>
         </div>
