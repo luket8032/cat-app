@@ -1,4 +1,26 @@
-.footer{
+.footer-container {
     border-top: 1px solid silver;
-    background-color: silver;
+    width: 100%;
+    margin-top: 5%;
+    padding-top: 1.5%;
+}
+
+.footer{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: auto;
+    align-items: center;
+    color: grey;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    text-align: center;
 }

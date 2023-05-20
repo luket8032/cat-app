@@ -1,10 +1,18 @@
 import React from 'react'
 import '../assets/css/footer.css'
+import {SiLinkedin} from 'react-icons/si';
 
 const Footer = () => {
   return (
-    <div className='footer'>
-        <h1>Site by Luke Tran</h1>
+    <div className='footer-container'>
+      <div className='footer'>
+        <ul>
+          <li>Site by Luke Tran</li>
+          <li>luket8032@hotmail.com</li>
+          <li><a href="https://www.linkedin.com/in/luke-tran-1220171a9/"><SiLinkedin color='grey'/></a></li>
+        </ul>
+        
+      </div>
     </div>
   )
 }
