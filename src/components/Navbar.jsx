@@ -12,7 +12,7 @@ const Navbar = () => {
             <li><a href="/" className='navlink'>Home</a></li>
             <li><a href="/findacat" className='navlink'>Find A Cat</a></li>
             <li><a href="/breeds" className='navlink'>Breeds</a></li>
-            <li><a href="/about" className='navlink'>About</a></li>
+            <li><a href="/contact" className='navlink'>Contact</a></li>
           </ul>
           <a href="https://github.com/luket8032/cat-app"><button className='git-button'><SiGithub size={30} className='icon'/>GitHub</button></a>
         </div>

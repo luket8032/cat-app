@@ -1,0 +1,38 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    margin: auto;
+    width: 20%;
+}
+
+.contactform {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    resize: none;
+    margin-bottom: 5%;
+}
+
+.contact-btn {
+    display: flex;
+    border-width: 2px;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    font-size: x-large;
+    background-color: black;
+    color: white;
+    margin: auto;
+}
+
+.contact-btn:hover {
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+}

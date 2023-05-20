@@ -4,7 +4,7 @@ import Navbar from './components/Navbar.jsx';
 import Home from './components/Home.jsx';
 import Findacat from './components/Findacat.jsx';
 import Breeds from './components/Breeds.jsx';
-import About from './components/About';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
               <Route path='/' element={<Home/>}/>
               <Route path='/findacat' element={<Findacat/>}/>
               <Route path='/breeds' element={<Breeds/>}/>
-              <Route path='/about' element={<About/>}/>
+              <Route path='/contact' element={<Contact/>}/>
             </Routes>
           </BrowserRouter>
     </div>

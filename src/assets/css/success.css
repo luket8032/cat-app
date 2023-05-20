@@ -1,0 +1,42 @@
+.background{
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vh;
+    z-index: 25;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.success-msg{
+    background-color: white;
+    width: 30%;
+    height: fit-content;
+    padding: 1%;
+    border-radius: 20px;
+}
+
+.success-btn {
+    display: flex;
+    border-width: 2px;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    font-size: x-large;
+    background-color: black;
+    color: white;
+    margin: auto;
+}
+
+.success-btn:hover {
+    background-color: white;
+    color: black;
+    transition: 0.2s;
+}
+
+.btn-container{
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
