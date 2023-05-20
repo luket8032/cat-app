@@ -3,10 +3,12 @@
     width: 100vw;
     height: 100vh;
     z-index: 25;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .success-msg{
