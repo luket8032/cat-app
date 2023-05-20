@@ -30,10 +30,10 @@ const Contact = () => {
     <div className='container'>
       <h1>Contact us</h1>
       <form className='contactform' ref={form} onSubmit={sendEmail}>
-        <label htmlFor="name">Name:</label>
-        <input className='input' type="text" id='name' name='name' required />
-        <label htmlFor="email">Email:</label>
-        <input className='input' type="email" id='email' name='email' required />
+        <label htmlFor="user_name">Name:</label>
+        <input className='input' type="text" id='user_name' name='user_name' required />
+        <label htmlFor="user_email">Email:</label>
+        <input className='input' type="email" id='user_email' name='user_email' required />
         <label htmlFor="message">Message:</label>
         <textarea className='input' name="message" id="message" cols="30" rows="10" required></textarea>
         <div className='btn-container'>
