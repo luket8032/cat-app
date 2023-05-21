@@ -4,7 +4,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import Stats from './Stats';
 
 function Breeds() {
-  const api_key = process.env.API_KEY;
+  const api_key = process.env.REACT_APP_API_KEY;
   const [isLoading, setLoading] = useState(true);
   const [breedlist, setBreedList] = useState([]);
   const [results, setResults] = useState(null);

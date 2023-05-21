@@ -5,7 +5,7 @@ import {CiSearch} from 'react-icons/ci';
 import Modal from './Modal.jsx'
 
 function Findacat() {
-  const api_key = process.env.API_KEY;
+  const api_key = process.env.REACT_APP_API_KEY;
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [order, setOrder] = useState('DESC');
@@ -26,10 +26,10 @@ function Findacat() {
   useMemo(() => {
     setLoading(true);
     Promise.all([
-      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}&mime_types=${imgType}&category_ids=${category}`, { headers: { 'x-api-key': api_key } })
+      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=24&breed_ids=${breed}&mime_types=${imgType}&category_ids=${category}`, { headers: { 'x-api-key': api_key } })
         .then(res => {
           setpaginationCount(res.headers.get('pagination-count'));
-          if (paginationCount <= 25) {
+          if (paginationCount <= 24) {
             setisMultiplePages(false);
           } else if (order === '') {
             setisMultiplePages(false);
@@ -184,7 +184,9 @@ function Findacat() {
       <div className='image-grid' style={{ display: isRuleBroken ? 'block' : 'hidden' }}>
         {results.map(result => (
           <div className='container'>
-            <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
+            <div className='iamge-wrapper'>
+              <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
+            </div>
             <div className='middle'>
               <button className='text' onClick={() => handleImageClick(result.url)}><CiSearch size={30} /></button>
             </div>
