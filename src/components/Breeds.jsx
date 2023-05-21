@@ -2,9 +2,10 @@ import React, { useMemo, useState }  from 'react'
 import '../assets/css/breeds.css'
 import BeatLoader from "react-spinners/BeatLoader";
 import Stats from './Stats';
+import Api_key from '../config.js'
 
 const Breeds = () => {
-  const api_key = 'live_VCzktalCGYDHVGnpidpr17uDiRrkOePItc8ABgKWRzqm5jxR0QjpuUbrKwBtFCeM';
+  const api_key = Api_key;
   const [isLoading, setLoading] = useState(true);
   const [breedlist, setBreedList] = useState([]);
   const [results, setResults] = useState(null);
