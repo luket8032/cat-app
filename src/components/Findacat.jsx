@@ -4,8 +4,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 import {CiSearch} from 'react-icons/ci';
 import Modal from './Modal.jsx'
 
-const Findacat = () => {
-  const api_key =process.env.API_KEY;
+function Findacat() {
+  const api_key = process.env.API_KEY;
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [order, setOrder] = useState('DESC');
@@ -26,19 +26,19 @@ const Findacat = () => {
   useMemo(() => {
     setLoading(true);
     Promise.all([
-      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}&mime_types=${imgType}&category_ids=${category}`, {headers: {'x-api-key': api_key}})
-      .then(res => {
-        setpaginationCount(res.headers.get('pagination-count'));
-        if (paginationCount <= 25) {
-          setisMultiplePages(false);
-        } else if (order === ''){
-          setisMultiplePages(false);
-        } else {
-          setisMultiplePages(true);
-        }
-        console.log(paginationCount)
-        return res.json();
-      }),
+      fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=25&breed_ids=${breed}&mime_types=${imgType}&category_ids=${category}`, { headers: { 'x-api-key': api_key } })
+        .then(res => {
+          setpaginationCount(res.headers.get('pagination-count'));
+          if (paginationCount <= 25) {
+            setisMultiplePages(false);
+          } else if (order === '') {
+            setisMultiplePages(false);
+          } else {
+            setisMultiplePages(true);
+          }
+          console.log(paginationCount);
+          return res.json();
+        }),
       fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json()),
       fetch('https://api.thecatapi.com/v1/categories').then(res => res.json())
     ])
@@ -46,7 +46,7 @@ const Findacat = () => {
         setResults(data[0]);
         setBreedList(data[1]);
         setcategorylist(data[2]);
-        if (breed !== '' && (order === 'ASC' || order === "DESC" )) {
+        if (breed !== '' && (order === 'ASC' || order === "DESC")) {
           setisRuleBroken(true);
         } else {
           setisRuleBroken(false);
@@ -61,18 +61,18 @@ const Findacat = () => {
       .catch((err) => {
         console.log(err);
       })
-      .finally (() => {
+      .finally(() => {
         setLoading(false);
-      })
-  }, [order, page, breed, imgType, category, paginationCount])
+      });
+  }, [order, page, breed, imgType, category, paginationCount]);
 
   const handleNextPage = () => {
     setPage(page + 1);
-  }
+  };
 
   const handlePrevPage = () => {
     setPage(page - 1);
-  }
+  };
 
   const handleImageClick = (url) => {
     setSelectedImage(url);
@@ -82,123 +82,123 @@ const Findacat = () => {
   if (isLoading) {
     return (
       <>
-      <div className='findacat-loader'>
-      <BeatLoader color='grey'/>
-      </div>
+        <div className='findacat-loader'>
+          <BeatLoader color='grey' />
+        </div>
       </>
-    )
+    );
   }
 
   return (
     <div>
       <div className='filters'>
         <div>
-        <label for='chooseorder'>Order By:</label>
-        <select
-        name="chooseorder"
-        id="chooseorder"
-        onChange={(e) => {
-          const selectedOrder = e.target.value;
-          setOrder(selectedOrder)
-        }}
-        defaultValue={order}
-        >
-          <option value="DESC">Newest</option>
-          <option value="ASC">Oldest</option>
-          <option value="">Random</option>
-        </select>
+          <label for='chooseorder'>Order By:</label>
+          <select
+            name="chooseorder"
+            id="chooseorder"
+            onChange={(e) => {
+              const selectedOrder = e.target.value;
+              setOrder(selectedOrder);
+            } }
+            defaultValue={order}
+          >
+            <option value="DESC">Newest</option>
+            <option value="ASC">Oldest</option>
+            <option value="">Random</option>
+          </select>
         </div>
 
         <div>
-        <label for="choosebreed" style={{display: hideBreed ? 'none' : 'line'}}>Breed:</label>
-        <select
-        name="choosebreed"
-        id="choosebreed"
-        style={{display: hideBreed ? 'none' : 'line'}}
-        onChange={(e) => {
-          const selectedBreed = e.target.value;
-          setBreed(selectedBreed);
-          setOrder('');
-          setimgType('');
-        }}
-        defaultValue={breed}
-        >
-          <option value="">Any</option>
-          {breedlist.map(result => (
-            <option value={result.id}>{result.name}</option>
-          ))}
-        </select>
+          <label for="choosebreed" style={{ display: hideBreed ? 'none' : 'line' }}>Breed:</label>
+          <select
+            name="choosebreed"
+            id="choosebreed"
+            style={{ display: hideBreed ? 'none' : 'line' }}
+            onChange={(e) => {
+              const selectedBreed = e.target.value;
+              setBreed(selectedBreed);
+              setOrder('');
+              setimgType('');
+            } }
+            defaultValue={breed}
+          >
+            <option value="">Any</option>
+            {breedlist.map(result => (
+              <option value={result.id}>{result.name}</option>
+            ))}
+          </select>
         </div>
 
         <div>
-        <label for='chooseimgtype'>Image Type:</label>
-        <select
-        name="chooseimgtype"
-        id="chooseimgtype"
-        onChange={(e) => {
-          const selectedType = e.target.value;
-          setimgType(selectedType)
-        }}
-        defaultValue={imgType}
-        >
-          <option value="">Any</option>
-          <option value="gif">gif</option>
-          <option value="jpg">jpg</option>
-          <option value="png">png</option>
-        </select>
+          <label for='chooseimgtype'>Image Type:</label>
+          <select
+            name="chooseimgtype"
+            id="chooseimgtype"
+            onChange={(e) => {
+              const selectedType = e.target.value;
+              setimgType(selectedType);
+            } }
+            defaultValue={imgType}
+          >
+            <option value="">Any</option>
+            <option value="gif">gif</option>
+            <option value="jpg">jpg</option>
+            <option value="png">png</option>
+          </select>
         </div>
 
         <div>
-        <label for="choosecategory">Category:</label>
-        <select
-        name="choosecategory"
-        id="choosecategory"
-        onChange={(e) => {
-          const selectedCategory = e.target.value;
-          console.log(paginationCount);
-          setCategory(selectedCategory);
-          if (page === 1) {
-            setPage(null);
-          } else {
-            setPage(page);
-          }
-        }}
-        defaultValue={category}
-        >
-          <option value="">Any</option>
-          {categorylist.map(result => (
-            <option value={result.id}>{result.name}</option>
-          ))}
-        </select>
+          <label for="choosecategory">Category:</label>
+          <select
+            name="choosecategory"
+            id="choosecategory"
+            onChange={(e) => {
+              const selectedCategory = e.target.value;
+              console.log(paginationCount);
+              setCategory(selectedCategory);
+              if (page === 1) {
+                setPage(null);
+              } else {
+                setPage(page);
+              }
+            } }
+            defaultValue={category}
+          >
+            <option value="">Any</option>
+            {categorylist.map(result => (
+              <option value={result.id}>{result.name}</option>
+            ))}
+          </select>
         </div>
       </div>
 
-      <div className='brokenrule' style={{display: isRuleBroken ? 'block': 'none'}}>
-            <h1 className='note'>Note: Only random ordering is available for sorting by breed.</h1>
+      <div className='brokenrule' style={{ display: isRuleBroken ? 'block' : 'none' }}>
+        <h1 className='note'>Note: Only random ordering is available for sorting by breed.</h1>
       </div>
 
-      <div className='brokenrule' style={{display: hideBreed ? 'block': 'none'}}>
-            <h1 className='note'>Note: Breed sorting is not available while sorting by image type.</h1>
+      <div className='brokenrule' style={{ display: hideBreed ? 'block' : 'none' }}>
+        <h1 className='note'>Note: Breed sorting is not available while sorting by image type.</h1>
       </div>
-      
-      <div className='image-grid' style={{display: isRuleBroken ? 'block': 'hidden'}}>
-      {results.map(result => (
-        <div className='container'>
-          <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
-          <div className='middle'>
-            <button className='text' onClick={() => handleImageClick(result.url)}><CiSearch size={30}/></button>
+
+      <div className='image-grid' style={{ display: isRuleBroken ? 'block' : 'hidden' }}>
+        {results.map(result => (
+          <div className='container'>
+            <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
+            <div className='middle'>
+              <button className='text' onClick={() => handleImageClick(result.url)}><CiSearch size={30} /></button>
+            </div>
           </div>
-        </div>
-      ))}
-      <Modal showModal={showModal} setShowModal={setShowModal} selectedImage={selectedImage} />
+        ))}
+        <Modal showModal={showModal} setShowModal={setShowModal} selectedImage={selectedImage} />
       </div>
 
-      <div className="pagination-bar" style={{display: isMultiplePages ? 'flex': 'none'}}>
+      <div className="pagination-bar" style={{ display: isMultiplePages ? 'flex' : 'none' }}>
         {page > 0 && <button className="page-btn" onClick={handlePrevPage}>{"< Prev Page"}</button>}
         <button className="page-btn" onClick={handleNextPage}> {"Next Page >"} </button>
       </div>
     </div>
-  )
+  );
 }
 
 export default Findacat
