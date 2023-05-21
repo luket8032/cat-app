@@ -5,7 +5,7 @@ import Stats from './Stats';
 import Api_key from '../../config.js'
 
 const Breeds = () => {
-  const api_key = Api_key;
+  const api_key = process.env.API_KEY;
   const [isLoading, setLoading] = useState(true);
   const [breedlist, setBreedList] = useState([]);
   const [results, setResults] = useState(null);

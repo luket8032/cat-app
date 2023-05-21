@@ -3,10 +3,9 @@ import '../assets/css/findacat.css'
 import BeatLoader from "react-spinners/BeatLoader";
 import {CiSearch} from 'react-icons/ci';
 import Modal from './Modal.jsx'
-import Api_key from '../../config.js'
 
 const Findacat = () => {
-  const api_key = Api_key;
+  const api_key =process.env.API_KEY;
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [order, setOrder] = useState('DESC');
