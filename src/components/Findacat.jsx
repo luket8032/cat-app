@@ -3,7 +3,7 @@ import '../assets/css/findacat.css'
 import BeatLoader from "react-spinners/BeatLoader";
 import {CiSearch} from 'react-icons/ci';
 import Modal from './Modal.jsx'
-import Api_key from '../config.js'
+import Api_key from '../../config.js'
 
 const Findacat = () => {
   const api_key = Api_key;

@@ -2,7 +2,7 @@ import React, { useMemo, useState }  from 'react'
 import '../assets/css/breeds.css'
 import BeatLoader from "react-spinners/BeatLoader";
 import Stats from './Stats';
-import Api_key from '../config.js'
+import Api_key from '../../config.js'
 
 const Breeds = () => {
   const api_key = Api_key;
