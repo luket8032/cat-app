@@ -8,7 +8,8 @@ const Home = () => {
   const [isLoading, setLoading] = useState(false);
 
   useMemo(() => {
-    setLoading(true);
+    setLoading(true); /* Show loader during fetch request */
+    /* Show random cat gif on page render */
     fetch('https://api.thecatapi.com/v1/images/search?limit=4&mime_types=gif', {headers: {'x-api-key': api_key}})
     .then(res => res.json())
     .then(data => setResults(data))
@@ -20,6 +21,7 @@ const Home = () => {
     })
   }, [])
 
+  /* Show loader while isLoading is set to true */
   if (isLoading) {
     return (
       <>

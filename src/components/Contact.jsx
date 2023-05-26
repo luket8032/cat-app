@@ -7,12 +7,12 @@ import FadeLoader from "react-spinners/BeatLoader";
 const Contact = () => {
   const form = useRef();
   const [sending, setSending] = useState(false);
-  const[test, setTest] = useState(true);
   const[showSucess, setShowSucess] = useState(false);
 
+  /* Function to send email with EmailJS */
   const sendEmail = (e) => {
-    e.preventDefault();
-    setSending(true)
+    e.preventDefault(); /* prevents form from being submitted */
+    setSending(true) /* Shows loader while email is being sent */
     emailjs.sendForm('service_zcen04b', 'template_w3farno', form.current, 'RnVT1zlkdz8VevDyP')
     .then((result) => {
       e.target.reset();
@@ -21,8 +21,8 @@ const Contact = () => {
       console.log(err);
     })
     .finally(() => {
-      setSending(false);
-      setShowSucess(true);
+      setSending(false); /* Stops showing loader when email is sent */
+      setShowSucess(true); /* Show success message if email is sent without error */
     })
   }
 

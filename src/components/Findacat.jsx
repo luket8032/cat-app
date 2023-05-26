@@ -5,29 +5,40 @@ import {CiSearch} from 'react-icons/ci';
 import Modal from './Modal.jsx'
 
 function Findacat() {
-  const api_key = process.env.REACT_APP_API_KEY;
+  const api_key = process.env.REACT_APP_API_KEY; /* Key for API use */
+
+  /* FETCH CONSTANTS */
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [order, setOrder] = useState('DESC');
+
+  /* PAGINATION CONSTANTS */
   const [page, setPage] = useState(0);
-  const [breedlist, setBreedList] = useState([]);
-  const [breed, setBreed] = useState('');
-  const [isRuleBroken, setisRuleBroken] = useState(false);
   const [isMultiplePages, setisMultiplePages] = useState(true);
   const [paginationCount, setpaginationCount] = useState(26);
+
+  /* FILTER CONSTANTS */
+  const [breedlist, setBreedList] = useState([]);
+  const [breed, setBreed] = useState('');
   const [imgType, setimgType] = useState('');
   const [hideBreed, sethideBreed] = useState(false);
   const [categorylist, setcategorylist] = useState([]);
   const [category, setCategory] = useState([]);
+  const [order, setOrder] = useState('DESC');
+  const [isRuleBroken, setisRuleBroken] = useState(false);
+
+  /* IMAGE GRID CONSTANTS */
   const [selectedImage, setSelectedImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
 
   useMemo(() => {
-    setLoading(true);
+    setLoading(true); /* Set loading to true when fetching api data */
+
+    /* Fetch for images, breed list, and category list */
     Promise.all([
       fetch(`https://api.thecatapi.com/v1/images/search?order=${order}&page=${page}&limit=24&breed_ids=${breed}&mime_types=${imgType}&category_ids=${category}`, { headers: { 'x-api-key': api_key } })
         .then(res => {
+          /* Conditions to include pagination bar if there are multiple pages */
           setpaginationCount(res.headers.get('pagination-count'));
           if (paginationCount <= 24) {
             setisMultiplePages(false);
@@ -36,7 +47,6 @@ function Findacat() {
           } else {
             setisMultiplePages(true);
           }
-          console.log(paginationCount);
           return res.json();
         }),
       fetch('https://api.thecatapi.com/v1/breeds').then(res => res.json()),
@@ -46,12 +56,14 @@ function Findacat() {
         setResults(data[0]);
         setBreedList(data[1]);
         setcategorylist(data[2]);
+        /* Conditions to ensure that only random ordering is allowed when filtering results by breed*/
         if (breed !== '' && (order === 'ASC' || order === "DESC")) {
           setisRuleBroken(true);
         } else {
           setisRuleBroken(false);
         }
 
+        /* Conditions to ensure that sorting by breed is not available when sorting by image type */
         if (imgType !== "") {
           sethideBreed(true);
         } else {
@@ -66,19 +78,23 @@ function Findacat() {
       });
   }, [order, page, breed, imgType, category, paginationCount]);
 
+  /* Move to the next page of results */
   const handleNextPage = () => {
     setPage(page + 1);
   };
 
+  /* Move to the previous page of results */
   const handlePrevPage = () => {
     setPage(page - 1);
   };
 
+  /* Enlarge image on click */
   const handleImageClick = (url) => {
     setSelectedImage(url);
     setShowModal(prev => !prev);
   };
 
+  /* Show loader when isLoading is true */
   if (isLoading) {
     return (
       <>
@@ -92,6 +108,7 @@ function Findacat() {
   return (
     <div>
       <div className='filters'>
+       {/* Filter for order type */}
         <div>
           <label for='chooseorder'>Order By:</label>
           <select
@@ -110,6 +127,7 @@ function Findacat() {
         </div>
 
         <div>
+          {/* Filter for breed type */}
           <label for="choosebreed" style={{ display: hideBreed ? 'none' : 'line' }}>Breed:</label>
           <select
             name="choosebreed"
@@ -131,6 +149,7 @@ function Findacat() {
         </div>
 
         <div>
+          {/* Filter for image type */}
           <label for='chooseimgtype'>Image Type:</label>
           <select
             name="chooseimgtype"
@@ -149,6 +168,7 @@ function Findacat() {
         </div>
 
         <div>
+          {/* Filter for category type */}
           <label for="choosecategory">Category:</label>
           <select
             name="choosecategory"
@@ -172,29 +192,34 @@ function Findacat() {
           </select>
         </div>
       </div>
-
+      {/* Note for ordering/breed rule */}
       <div className='brokenrule' style={{ display: isRuleBroken ? 'block' : 'none' }}>
         <h1 className='note'>Note: Only random ordering is available for sorting by breed.</h1>
       </div>
-
+      
+      {/* Note for breed/image type rule */}
       <div className='brokenrule' style={{ display: hideBreed ? 'block' : 'none' }}>
         <h1 className='note'>Note: Breed sorting is not available while sorting by image type.</h1>
       </div>
-
+      
+      {/* Displaying image grid based on results from fetch */}
       <div className='image-grid' style={{ display: isRuleBroken ? 'block' : 'hidden' }}>
         {results.map(result => (
           <div className='container'>
             <div className='iamge-wrapper'>
               <img className='findacat-img' key={result.id} src={result.url} alt='kitty' />
             </div>
+            {/* Shows icon to enlarge image when image is hovered */}
             <div className='middle'>
               <button className='text' onClick={() => handleImageClick(result.url)}><CiSearch size={30} /></button>
             </div>
           </div>
         ))}
+        {/* Shows modal when middle is clicked */}
         <Modal showModal={showModal} setShowModal={setShowModal} selectedImage={selectedImage} />
       </div>
-
+      
+      {/* Pagination bar showed when there is multiple pages of image result */}
       <div className="pagination-bar" style={{ display: isMultiplePages ? 'flex' : 'none' }}>
         {page > 0 && <button className="page-btn" onClick={handlePrevPage}>{"< Prev Page"}</button>}
         <button className="page-btn" onClick={handleNextPage}> {"Next Page >"} </button>

@@ -4,15 +4,16 @@ import BeatLoader from "react-spinners/BeatLoader";
 import Stats from './Stats';
 
 function Breeds() {
-  const api_key = process.env.REACT_APP_API_KEY;
+  const api_key = process.env.REACT_APP_API_KEY; /* Key for API use */
   const [isLoading, setLoading] = useState(true);
-  const [breedlist, setBreedList] = useState([]);
   const [results, setResults] = useState(null);
+  const [breedlist, setBreedList] = useState([]);
   const [breed, setBreed] = useState('abys');
   const [breedImg, setBreedImg] = useState([]);
 
   useMemo(() => {
     setLoading(true);
+    /* Fetch for breed list, image, and information */
     Promise.all([
       fetch('https://api.thecatapi.com/v1/breeds', { headers: { 'x-api-key': api_key } }).then(res => res.json()),
       fetch(`https://api.thecatapi.com/v1/breeds/${breed}`, { headers: { 'x-api-key': api_key } }).then(res => res.json()),
@@ -44,6 +45,7 @@ function Breeds() {
   return (
     <div id='container'>
       <div className='filter'>
+        {/* SELECT component to allow users to choose breed to display */}
         <div className='breed-select'>
           <label htmlFor="breedlist" style={{ textAlign: 'center' }}>Select a breed:</label>
           <select
@@ -64,6 +66,7 @@ function Breeds() {
       </div>
       <h1 className='breed-name'>{results["name"]}</h1>
       <img className='breed-img' src={breedImg[0]["url"]} alt='breed pic' />
+      {/* Content for selected breed */}
       <div className='breed-content'>
         <div className='breed-text'>
           <p><b>Description: </b>{results["description"]}</p>
@@ -72,6 +75,7 @@ function Breeds() {
       </div>
       <div className='stats-container'>
         <h1 className='stats-name'>{results["name"]} Stats</h1>
+        {/* Displays stars based on stat value of selected breed */}
         <div className='breed-stats'>
           <div className='stat'><b>Adaptability:</b><Stats rating={parseInt(results["adaptability"])} /></div>
           <div className='stat'><b>Affection Level:</b><Stats rating={parseInt(results["affection_level"])} /></div>
@@ -87,7 +91,8 @@ function Breeds() {
           <div className='stat'><b>Vocalisation:</b><Stats rating={parseInt(results["vocalisation"])} /></div>
         </div>
       </div>
-
+      
+      {/* Links for additional information of selected breed */}
       <div className='links-container'>
         <h1 className='stats-name'>Other Links:</h1>
         <div className='links'>

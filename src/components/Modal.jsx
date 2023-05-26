@@ -6,12 +6,14 @@ import {saveAs} from "file-saver";
 const Modal = ({ showModal, setShowModal, selectedImage }) => {
     const modalRef = useRef();
 
+    /* close modal popup when you click outside of modal */
     const closeModal = e => {
         if(modalRef.current === e.target) {
             setShowModal(false);
         }
     }
 
+    /* Download image when download button is clicked */
     const handleDownload = () => {
         let url = selectedImage
         saveAs(url, 'cat-img')

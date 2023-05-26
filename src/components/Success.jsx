@@ -4,12 +4,14 @@ import '../assets/css/success.css'
 const Success = ({showSuccess, setShowSucess}) => {
     const modalRef = useRef();
 
+    /* Close popup when click outside of popup */
     const closeModal = e => {
         if(modalRef.current === e.target) {
             setShowSucess(false);
         }
     }
 
+    /* Close popup when close button is clicked */
     const btnCloseModal = () => {
         setShowSucess(false);
     };
