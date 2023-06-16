@@ -88,3 +88,9 @@
     justify-content: space-between;
     list-style-type: none;  
 }
+
+.loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}

@@ -25,7 +25,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <>
-      <div className='findacat-loader'>
+      <div className='loader'>
       <BeatLoader color='grey'/>
       </div>
       </>
@@ -38,11 +38,9 @@ const Home = () => {
       {results.length > 0 && <img className='home-img' src={results[0].url} alt="kitty" />}
       <div>
         <h1 className='slogan'>All the cat images you'll ever need in one place. 😺</h1>
-        <p className='landing-text'>Welcome to CatHub, your one-stop-shop for downloading all your favorite cat images.
-           With our powerful search feature and free downloads, finding and using the perfect kitty picture has never been easier. So why wait? 
-           Start browsing our collection of adorable feline friends today! </p>
+        <p className='landing-text'>Welcome to CatHub, your go-to website for exploring various cat breeds. 
+        Find detailed descriptions, unique traits, and additional resources for each breed, and embark on a captivating journey into the world of cats.</p>
            <div className='homepage-btns'>
-            <a href="/findacat" className='homepage-btn'>Find a cat here</a>
             <a href="/breeds" className='homepage-btn'>Search by breed</a>
            </div>
       </div>

@@ -10,7 +10,6 @@ const Navbar = () => {
           <a href="/"><img class='mmocat' src={catlogo} alt="catlogo"/></a>
           <ul class='navlist'>
             <li><a href="/" className='navlink'>Home</a></li>
-            <li><a href="/findacat" className='navlink'>Find A Cat</a></li>
             <li><a href="/breeds" className='navlink'>Breeds</a></li>
             <li><a href="/contact" className='navlink'>Contact</a></li>
           </ul>

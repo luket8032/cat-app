@@ -35,7 +35,7 @@ function Breeds() {
   if (isLoading) {
     return (
       <>
-        <div className='findacat-loader'>
+        <div className='loader'>
           <BeatLoader color='grey' />
         </div>
       </>
